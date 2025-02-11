@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["ryotaro-shirai"]
   spec.email = ["ryotaro.shirai@giftee.co"]
 
-  spec.summary = "Returns the day of week in Japanese."
-  spec.description = "Returns the day of week in Japanese."
+  spec.summary = "A simple library to get Japanese day names."
+  spec.description = "Converts Date and Time objects into Japanese weekday names in different formats (kanji, hiragana, katakana, short)."
   spec.homepage = "https://github.com/ryotaro-shirai/youbi"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
