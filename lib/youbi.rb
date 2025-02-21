@@ -22,7 +22,7 @@ module Youbi
 
   module Extensions
 
-    def to_japanese_day(format: :kanji)
+    def japanese_day(format: :kanji)
       raise Youbi::Error, "Invalid format: #{format}" unless VALID_FORMATS.include?(format)
 
       weekday = %i[sunday monday tuesday wednesday thursday friday saturday][self.wday]
