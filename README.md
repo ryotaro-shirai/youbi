@@ -1,34 +1,79 @@
-# Youbi
+# youbi
 
-TODO: Delete this and the text below, and describe your gem
+Converts Date and Time objects into Japanese weekday names in different formats (kanji, hiragana, katakana, short).
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/youbi`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Gem Version](https://badge.fury.io/rb/youbi.svg)](https://rubygems.org/gems/youbi)
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Add this line to your application's Gemfile:
+```ruby
+gem 'youbi'
+```
+And then execute:
+```
+$ bundle install
+```
+Or install it yourself as:
+```
+$ gem install youbi
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Get the Japanese weekday name
+The `japanese_day` method can be used with both `Date` and `Time` objects.
 
-## Development
+#### Example:
+```ruby
+require "youbi"
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+date = Date.new(2025, 2, 10) # 月曜日
+time = Time.new(2025, 2, 10, 12, 0, 0) # 月曜日
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+puts date.japanese_day  # => "月曜日"
+puts time.japanese_day  # => "月曜日"
+```
+
+### Available Formats
+
+The `japanese_day(format: :○○)` option allows you to get the weekday in different formats.
+
+| Option | Example (Monday) |
+|-----------|----------------|
+| `:kanji`  | `"月曜日"`       |
+| `:hiragana` | `"げつようび"`   |
+| `:katakana` | `"ゲツヨウビ"`   |
+| `:short`  | `"月"`          |
+
+#### Example:
+```ruby
+puts date.japanese_day(format: :hiragana)  # => "げつようび"
+puts date.japanese_day(format: :katakana)  # => "ゲツヨウビ"
+puts date.japanese_day(format: :short)     # => "月"
+```
+
+### Error Handling
+If you pass an invalid format to `japanese_day`, the gem will raise a `Youbi::Error`.
+
+#### Example:
+```ruby
+begin
+  date.japanese_day(format: :invalid_format)
+rescue Youbi::Error => e
+  puts e.message  # => "Invalid format: invalid_format"
+end
+```
+
+### Running Tests
+You can run tests using RSpec:
+```
+bundle exec rspec
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/youbi. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/youbi/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/ryotaro-shirai/youbi. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/ryotaro-shirai/youbi/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -36,4 +81,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Youbi project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/youbi/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the Youbi project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/ryotaro-shirai/youbi/blob/main/CODE_OF_CONDUCT.md).
